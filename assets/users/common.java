@@ -1,3 +1,5 @@
+package assets.users;
+
 import java.io.*;
 import java.util.*;
 
@@ -9,7 +11,7 @@ public class common implements user{
 
 //	void register() 
 
-	public student(){
+	public common(){
 		this.set_UserName();
 		this.set_UserType(0);
 		this.set_UserLimit(15);

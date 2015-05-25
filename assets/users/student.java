@@ -1,3 +1,5 @@
+package assets.users;
+
 import java.io.*;
 import java.util.*;
 

@@ -1,3 +1,5 @@
+package assets.users;
+
 public interface user{
 	void register(); //register gonna insert this user on csv file.
 	void set_UserName(); //register user name.

@@ -1,3 +1,5 @@
+package assets.users;
+
 import java.io.*;
 import java.util.*;
 
@@ -8,7 +10,7 @@ public class teacher implements user{
 	Scanner sc;
 
 //	void register() 
-	public student(){
+	public teacher(){
 		this.set_UserName();
 		this.set_UserType(1);
 		this.set_UserLimit(15);
