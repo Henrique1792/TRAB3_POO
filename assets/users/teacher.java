@@ -9,7 +9,10 @@ public class teacher implements user{
 	int limit, type, nbooks;
 	Scanner sc;
 
-//	void register() 
+	void register(){
+
+	}
+
 	public teacher(){
 		this.set_UserName();
 		this.set_UserType(1);
@@ -19,17 +22,18 @@ public class teacher implements user{
 
 	void set_UserName(){
 		sc = new Scanner(System.in);
-		this.name=sc.nextLine();
+		this.name = sc.nextLine();
 	}
-	void set_UserType(int Type){
-		this.type=Type;
+
+	void set_UserType(int type){
+		this.type = type;
 	}
 
 	void set_UserNbooks(int nb){
-		this.nbooks=nb;
+		this.nbooks = nb;
 	}
 
-	void set_UserLimit(int Limit){
-		this.limit=Limit;	
+	void set_UserLimit(int limit){
+		this.limit = limit;	
 	}
 }
