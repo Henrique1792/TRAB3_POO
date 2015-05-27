@@ -2,7 +2,7 @@ package assets.operations;
 
 import java.io.*;
 import java.util.*;
-
+/*read all implementada =D*/
 
 public class operations{
 
