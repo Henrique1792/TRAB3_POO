@@ -45,8 +45,8 @@ public class books{
 	}
 
 	public void reg_book(String csv)throws IOException{
-		BufferedWriter buffWrite = new BufferedWriter(new FileWriter(csv));
-		buffWrite.append(this.title+" "+this.isGlobal+" "+this.isRent);
+		BufferedWriter buffWrite = new BufferedWriter(new FileWriter(csv,true));
+		buffWrite.append(this.title+" "+this.isGlobal+" "+this.isRent+"\n");
 		buffWrite.close();
 	}
 	public void read_book(String csv)throws IOException{
@@ -56,6 +56,7 @@ public class books{
 		System.out.println(teste);
 		buffRead.close();
 	}
+	
 
 	void set_bookname(){
 		this.reading=new Scanner(System.in);
