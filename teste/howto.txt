@@ -1,0 +1,25 @@
+como utilizar o .jar:
+
+
+criando o .jar
+		jar cf jar-file input-file(s)
+
+		flags:
+				v = verbose 
+				0 = jar não comprime os arquivos
+				M = o manifest default não é produzido
+				m = inclui as informações de manifest de um manifest file já existente.
+				-C = troca de diretórios durante a execução do comando.
+
+ver o conteúdo do.jar
+				jar tf jar-file
+
+extrair o conteúdo do .jar
+				jar xf jar-file [archived-file(s)]
+
+rodar o .jar como uma application
+				java -jar jar-file
+				(não consegui usar como applet.)
+
+atualizar o conteúdo do .jar
+				jar uf jar-file input-file(s)
