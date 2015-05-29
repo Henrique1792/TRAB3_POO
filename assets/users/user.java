@@ -1,4 +1,6 @@
 package assets.users;
+
+//Importing Java packages...
 import java.io.*;
 import java.util.*;
 
@@ -7,20 +9,26 @@ public class user{
 	int limit, type, nbooks;
 	Scanner sc;
 
-	public void register_user()throws IOException{
+	public void register_user() throws IOException{
 		BufferedWriter buffWrite = new BufferedWriter(new FileWriter("users.csv",true));
-		buffWrite.append(this.name + " "+this.type+" "+this.nbooks+" "+this.limit+"\n");
+		buffWrite.append(this.name + " " + this.type + " " + this.nbooks + " " + this.limit + "\n");
 		buffWrite.close();
 	}
 
-	public void read_user(String csv)throws IOException{
+	public void read_user(String csv) throws IOException{
 		String teste;
 		BufferedReader buffRead = new BufferedReader(new FileReader(csv));
-		teste=buffRead.readLine();
-		System.out.println("testando o rolê: "+teste+"\n");
+		teste = buffRead.readLine();
+		System.out.println("testando o rolê: " + teste + "\n");
 		buffRead.close();
 	}
+
+	void print_User(){
+		System.out.println("[Nome]: " + this.name);
+	}
+
 	void set_UserName(){
+		System.out.println("	>Digite o nome de usuário: ");
 		sc = new Scanner(System.in);
 		this.name = sc.nextLine();
 	}

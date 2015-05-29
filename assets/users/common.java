@@ -1,14 +1,10 @@
 package assets.users;
 
-//Importing our assets...
-import assets.users.user;
-
-//Importing Java packages..
+//Importing Java packages...
 import java.io.*;
 import java.util.*;
 
-
-public class common extends  user{
+public class common extends user{
 	public common(){
 		this.set_UserName();
 		this.set_UserType(0);

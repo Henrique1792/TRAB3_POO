@@ -1,8 +1,8 @@
 package assets.users;
 
+//Importing Java packages...
 import java.io.*;
 import java.util.*;
-
 
 public class teacher extends user{
 	public teacher(){
