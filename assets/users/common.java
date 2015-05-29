@@ -7,7 +7,9 @@ import assets.users.user;
 import java.io.*;
 import java.util.*;
 
-
+/*
+classe comunidade , tipo 0, limite 15 dias, numero de livros permitidos 2
+*/
 public class common extends  user{
 	public common(){
 		this.set_UserName();

@@ -3,52 +3,36 @@ package assets.books;
 import java.io.*;
 import java.util.*;
 
-/*Books:important info!
- Estamos usando um boolean para settar se um livro
- já foi alugado ou não.
- tudo bem que os testes podem ser true ou false, mas apenas
- atentar aos campos, que estão na seguinte ordem no montador.
- 
-	booktitle
-	isGlobal (liberado pra GALERA ou se é Texto)
-	isRent (se está presente ou não);
-
-Para que não ocorram problemas, é preciso seguir essa ordem na leitura.
-Até onde sei NÃO HÁ ESCRITA POR BYTES NO ARQUIVO, e vamos ter de usar as streams
-nas buscas, até onde sei é o jeito mais fácil de ir percorrendo o arquivo.
-no mais eu acho que é isso, vou mandar esse arquivo na branch 0.0.01
-
-se alguém não souber o pq dos números, eu explico:
-
-primeiro num: versão final (1) ou versão em construção/testes(0);
-segundo num: versão em debugging(1 e demais números) e construção (0)
-terceiro num: versão da edição.
-
-acho que é isso xD
-
-Cordialmente Henrique Freitas
-
-
- */
-
-
+/*
+classe books , isglobal para texto ou geral, isrent para disponibilidade
+*/
 public class books{
-	boolean isGlobal;
-	boolean isRent;
+	boolean isGlobal = false;
+	boolean isRent = false;
 	String title;
 	Scanner reading;
 	
+        /*
+        construtor
+        */
 	public books(){
 		this.set_bookname();
 		this.set_isGlobal();
 		this.set_Rent(false);
 	}
-
+       
+        /*
+        escrita no arquivo books
+        */
 	public void reg_book(String csv)throws IOException{
-		BufferedWriter buffWrite = new BufferedWriter(new FileWriter(csv));
-		buffWrite.append(this.title+" "+this.isGlobal+" "+this.isRent);
+		BufferedWriter buffWrite = new BufferedWriter(new FileWriter(csv,true));
+		buffWrite.append(this.title+" "+this.isGlobal+" "+this.isRent+"\n");
 		buffWrite.close();
 	}
+        
+        /*
+        leitura do arquivo
+        */
 	public void read_book(String csv)throws IOException{
 		String teste;
 		BufferedReader buffRead = new BufferedReader(new FileReader(csv));
@@ -56,13 +40,25 @@ public class books{
 		System.out.println(teste);
 		buffRead.close();
 	}
-
+	
+        /*
+        setter book name
+        */
 	void set_bookname(){
 		this.reading=new Scanner(System.in);
 		this.title=this.reading.nextLine();
 	}
-
+        
+        /*
+        getter book name
+        */
+        String get_bookname(){
+            return this.title;
+        }
 	
+        /*
+        setter is global
+        */
 	void set_isGlobal(){
 		String receiver;
 		System.out.println("It's a general book? <YES/NO>");
@@ -74,12 +70,26 @@ public class books{
 			this.isGlobal=false;
 
 	}
-
+        
+        /*
+        getter is global
+        */
+        boolean get_isGlobal(){
+		return this.isGlobal;
+	}
+        
+        /* 
+        setter is rent
+        */
+        void set_Rent(boolean check){
+		check=this.isRent;
+	}
+        /*
+        getter is rent
+        */
 	boolean get_isRent(){
 		return this.isRent;
 	}
 	
-	void set_Rent(boolean check){
-		check=this.isRent;
-	}
+	
 }
