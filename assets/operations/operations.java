@@ -20,26 +20,29 @@ public class operations{
 
 		System.out.println(">Tipos de usuário: [C]omunidade, [A]luno ou [P]rofessor");
 		while(ok == 0){
-			System.out.println("	>Informe o tipo de usuário: ");
+			System.out.printf("	>Informe o tipo de usuário: ");
 			input = sc.next();
 			switch(input){
 				case "A":
 					user = new student();
+					user.print_User();
 					ok = 1;
 					break;
 				case "C":
 					user = new common();
+					user.print_User();
 					ok = 1;
 					break;
 				case "P":
 					user = new teacher();
+					user.print_User();
 					ok = 1;
 					break;
 			}
 		}
 
 		//user.register_user();
-		System.out.println("		OK!");
+		System.out.println("\n		OK! Usuário cadastrado :D\n");
 	}
 
 	/*Recupera e imprime todos os livros cadastrados de um arquivo.

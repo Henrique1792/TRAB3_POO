@@ -23,12 +23,21 @@ public class user{
 		buffRead.close();
 	}
 
-	void print_User(){
-		System.out.println("[Nome]: " + this.name);
+	public void print_User(){
+		this.print_Name();
+		this.print_Type();
+	}
+
+	void print_Name(){
+		System.out.println("\n[Nome]: " + this.name);
+	}
+
+	void print_Type(){
+		System.out.println("[Tipo]: Usuário");
 	}
 
 	void set_UserName(){
-		System.out.println("	>Digite o nome de usuário: ");
+		System.out.printf("	>Digite o nome de usuário: ");
 		sc = new Scanner(System.in);
 		this.name = sc.nextLine();
 	}

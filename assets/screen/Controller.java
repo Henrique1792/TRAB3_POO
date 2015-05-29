@@ -1,7 +1,7 @@
 package assets.screen;
 
 //Importing our assets...
-import assets.operations.operations;
+import assets.operations.*;
 
 //Importing Java packages...
 import java.io.*;
@@ -24,10 +24,12 @@ public class Controller extends screen_utils{
 			quit = sc.nextInt();
 			switch(quit){
 				case 1:
-					System.out.println("HUE");
-					this.op.create_user();
+					op.create_user();
+					this.delim();
 					break;
 				case 2:
+					this.delim();
+					break;
 				case 3:
 					break;
 			}
@@ -42,7 +44,11 @@ public class Controller extends screen_utils{
 			quit = sc.nextInt();
 			switch(quit){
 				case 1:
+					this.delim();
+					break;
 				case 2:
+					this.delim();
+					break;
 				case 3:
 					break;
 			}
@@ -57,7 +63,11 @@ public class Controller extends screen_utils{
 			quit = sc.nextInt();
 			switch(quit){
 				case 1:
+					this.delim();
+					break;
 				case 2:
+					this.delim();
+					break;
 				case 3:
 					break;
 			}
@@ -72,8 +82,14 @@ public class Controller extends screen_utils{
 			quit = sc.nextInt();
 			switch(quit){
 				case 1:
+					this.delim();
+					break;
 				case 2:
+					this.delim();
+					break;
 				case 3:
+					this.delim();
+					break;
 				case 4:
 					break;
 			}
