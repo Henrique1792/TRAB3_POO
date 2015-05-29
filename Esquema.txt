@@ -1,0 +1,50 @@
+Esquema 
+
+WHAT TO DO
+
+- cadastrar users (nbooks, limit, type)
+  alunos (4 livros, 15 dias)
+  profs (6 livros, 60 dias)
+  comunidade (2 livros, 15 dias)
+
+ - cadastrar livros (isglobal)
+   txt (alunos e profs)
+   geral (todos)
+
+ - registrar empréstimos (write no arquivo de empréstimo)
+ - avisar atraso (read do arq de esmpréstimo)
+ - calcular penalidade 
+ - registrar devolução (apagar registro do arq de esmpréstimo)
+
+ - listar livros cadastrados (read arq de books)
+ - listar users registrados (read arq de users)
+ - listar todos os empréstimos (read arq de esmpréstimos)
+
+ HOW TO DO
+
+ - registrar empréstimos (
+   class rent
+     if is_rent do book != 0 && nbooks do user > 0
+       set_rent = 1
+       set_nbooks = valor -1
+       write no arq de empréstimo (title|user|data atual|data devolução)
+
+ - avisar atraso (read do arq de esmpréstimo)
+   ler do arq de empréstimo
+   stream e filter pelo campo data de devolução
+   if data atual > data devolução
+     imprimir registro e mostrar penalidade = numero de dias atrasado
+
+ - registrar devolução (apagar registro do arq de esmpréstimo)
+   ler do arq de empréstimo e procurar o title a ser devolvido
+   if found
+     set_rent = 0
+     set_nbooks = valor +1
+     marca registro como excluido 
+
+- listar livros cadastrados/ users registrados/ empréstimos em andamento
+  ler os respectivos arquivos
+  criar streams
+  imprimir todos
+
+  
