@@ -19,7 +19,6 @@ public class user{
 		String teste;
 		BufferedReader buffRead = new BufferedReader(new FileReader(csv));
 		teste = buffRead.readLine();
-		System.out.println("testando o rolê: " + teste + "\n");
 		buffRead.close();
 	}
 

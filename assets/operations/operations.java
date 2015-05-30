@@ -3,6 +3,7 @@ package assets.operations;
 //Importing our assets...
 import assets.users.*;
 
+
 //Importing Java packages...
 import java.io.*;
 import java.util.*;
@@ -15,34 +16,44 @@ public class operations{
 	public void create_user(){
 		Scanner sc = new Scanner(System.in);
 		String input;
-		user user;
+		user Usr;
 		int ok = 0;
 
 		System.out.println(">Tipos de usuário: [C]omunidade, [A]luno ou [P]rofessor");
+		System.out.println("\n> Informe o tipo de usuário");
 		while(ok == 0){
-			System.out.printf("	>Informe o tipo de usuário: ");
 			input = sc.next();
 			switch(input){
 				case "A":
-					user = new student();
-					user.print_User();
+					Usr = new student();
+					Usr.print_User();
 					ok = 1;
 					break;
 				case "C":
-					user = new common();
-					user.print_User();
-					ok = 1;
+					Usr = new common();
+					Usr.print_User();
+					ok= 1;
 					break;
 				case "P":
-					user = new teacher();
-					user.print_User();
+					Usr = new teacher();
+					Usr.print_User();
 					ok = 1;
 					break;
 			}
+			 if (ok==1){
+				try{
+					Usr.register_usr();
+					System.out.println("Usuário cadastrado.\n");
+			
+				} catch(IOException input_mistake){
+					System.out.println("cadastro não foi possível");
+				}
+		 
+			 }
 		}
 
-		//user.register_user();
-		System.out.println("\n		OK! Usuário cadastrado :D\n");
+		
+	
 	}
 
 	/*Recupera e imprime todos os livros cadastrados de um arquivo.
