@@ -9,7 +9,7 @@ public class user{
 	int limit, type, nbooks;
 	Scanner sc;
 
-	public void register_user() throws IOException{
+	 public void register_user() throws IOException{
 		BufferedWriter buffWrite = new BufferedWriter(new FileWriter("users.csv",true));
 		buffWrite.append(this.name + " " + this.type + " " + this.nbooks + " " + this.limit + "\n");
 		buffWrite.close();
