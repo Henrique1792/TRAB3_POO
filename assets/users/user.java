@@ -9,7 +9,7 @@ public class user{
 	int limit, type, nbooks;
 	Scanner sc;
 
-	public void register_user() throws IOException{
+	 public void register_user() throws IOException{
 		BufferedWriter buffWrite = new BufferedWriter(new FileWriter("users.csv",true));
 		buffWrite.append(this.name + " " + this.type + " " + this.nbooks + " " + this.limit + "\n");
 		buffWrite.close();
@@ -19,7 +19,6 @@ public class user{
 		String teste;
 		BufferedReader buffRead = new BufferedReader(new FileReader(csv));
 		teste = buffRead.readLine();
-		System.out.println("testando o rolê: " + teste + "\n");
 		buffRead.close();
 	}
 
@@ -52,5 +51,38 @@ public class user{
 
 	void set_UserLimit(int limit){
 		this.limit = limit;	
+	}
+
+
+	public void recoverAllUsers(String csv)throws IOException{
+	String teste, parts[];
+	BufferedReader reading = new BufferedReader(new FileReader(csv));
+		
+		while(reading.ready()){
+			teste = reading.readLine();
+			parts=teste.split(" ");
+			this.name=parts[0];
+			this.type= Integer.parseInt(parts[1]);
+			this.nbooks= Integer.parseInt(parts[2]);
+			this.limit= Integer.parseInt(parts[3]);
+			
+			System.out.println("Usuário: "+name);
+			switch(this.type){
+					case '0':
+							System.out.println("Tipo do usuário: Comum");
+							break;
+					case '1':
+							System.out.println("Tipo do usuário: Estudante");
+							break;
+					case '2':
+							System.out.println("Tipo do usuário: Professor");
+							break;
+			}	
+			System.out.println("Número de livros alugados: "+this.nbooks);
+			System.out.println("Tempo-Limite para devolução: "+this.nbooks);
+
+
+		}
+		reading.close();
 	}
 }

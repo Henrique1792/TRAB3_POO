@@ -83,4 +83,28 @@ public class books{
 	void set_Rent(boolean check){
 		check=this.isRent;
 	}
+
+	public void recoverAllBooks(String csv)throws IOException{
+		String teste,parts[];
+		BufferedReader reading = new BufferedReader(new FileReader(csv));
+		
+		while(reading.ready()){
+			teste = reading.readLine();
+			parts=teste.split(" ");
+			this.title=parts[0];
+			this.isGlobal=Boolean.valueOf(parts[1]);
+			this.isRent=Boolean.valueOf(parts[2]);
+			
+			if(this.isGlobal)
+					System.out.print("Comum ");
+			else
+					System.out.print("Texto ");
+			if(this.isRent)
+					System.out.print("Alugado\n");
+			else
+					System.out.print("Disponível");
+		}
+		reading.close();
+	}
+
 }
