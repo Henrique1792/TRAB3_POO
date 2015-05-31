@@ -60,8 +60,8 @@ public class rent extends operations{
 			
 			System.out.println("Usuário: "+nameaux);	
 			System.out.println("Título: "+this.titleaux);
-                        this.returned=Boolean.valueOf(parts[2]);
-                        if(this.returned)
+            this.returned=Boolean.valueOf(parts[2]);
+            if(this.returned)
 					System.out.print("devolvido");
 			else
 					System.out.print("pendente");
