@@ -53,13 +53,29 @@ public class screen_utils{
 		System.out.println("	[4] Voltar ao Menu");
 	}
 
+	void searchScreen(){
+		this.screenHeader();
+		System.out.println("\n	[1] Pesquisar um Usuário");
+		System.out.println("	[2] Pesquisar um Livro");
+		System.out.println("	[3] Voltar ao Menu");
+	}
+
+	void removeScreen(){
+		this.screenHeader();
+		System.out.println("\n	[1] Remover um Usuário");
+		System.out.println("	[2] Remover um Livro");
+		System.out.println("	[3] Voltar ao Menu");
+	}
+
 	void mainScreen(){
 		this.screenHeader();
 		System.out.println("\n	[1] Cadastrar Usuário ou Livro");
 		System.out.println("	[2] Registrar Empréstimos e Devoluções");
 		System.out.println("	[3] Atrasos e Suspensões");
 		System.out.println("	[4] Listar Cadastros e Empréstimos");
-		System.out.println("	[5] Sair do Programa");
+		System.out.println("	[5] Pesquisar Usuário ou Livro");
+		System.out.println("	[6] Remover Usuário ou Livro");
+		System.out.println("	[7] Sair do Programa");
 	}
 
 }

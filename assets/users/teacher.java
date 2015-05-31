@@ -12,9 +12,5 @@ public class teacher extends user{
 		this.set_UserLimit(15);
 		this.set_UserNbooks(4);
 	}
-
-	void print_Type(){
-		System.out.println("[Tipo]: Professor");
-	}
-
+	
 }

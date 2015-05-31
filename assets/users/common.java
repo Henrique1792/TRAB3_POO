@@ -13,8 +13,4 @@ public class common extends user{
 		this.set_UserNbooks(2);
 	}
 
-	void print_Type(){
-		System.out.println("[Tipo]: Comunidade");
-	}
-
 }

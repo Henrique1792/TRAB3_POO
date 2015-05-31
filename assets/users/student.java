@@ -13,8 +13,4 @@ public class student extends user{
 		this.set_UserNbooks(4);
 	}
 
-	void print_Type(){
-		System.out.println("[Tipo]: Aluno");
-	}
-
 }
