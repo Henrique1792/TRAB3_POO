@@ -42,7 +42,6 @@ public class books{
 			ok[1]++; //incrementa contador para verificar offset
 		}
 
-		System.out.println("\t>Posição no arquivo: " + ok[1]);
 		reading.close();
 		return ok;
 	}
@@ -65,6 +64,18 @@ public class books{
 		this.isGlobal = isGlobal;
 	}
 
+	public String get_BookTitle(){
+		return this.title;
+	}
+
+	public boolean get_isGlobal(){
+		return this.isGlobal;
+	}
+
+	public boolean get_isRent(){
+		return this.isRent;
+	}
+
 	public void print_Book(){
 		this.print_Title();
 		this.print_isGlobal();
@@ -76,7 +87,7 @@ public class books{
 		int ok = 0;
 
 		while (ok == 0){
-			System.out.printf("\t>É um livro de uso global? <Y/N>:");
+			System.out.printf("\t>É um livro de uso global? <Y/N>: ");
 
 			this.reading = new Scanner(System.in);
 			receiver = reading.nextLine();
@@ -106,12 +117,9 @@ public class books{
 		else System.out.println(">Disponível");
 	}
 
-	boolean get_isGlobal(){
-		return this.isGlobal;
-	}
-
-	boolean get_isRent(){
-		return this.isRent;
+	public void print_wasReturned(){
+		if(this.isRent) System.out.println(">Alugado");
+		else System.out.println(">Devolvido");
 	}
 
 }

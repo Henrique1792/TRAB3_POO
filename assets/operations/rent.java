@@ -1,32 +1,36 @@
 package assets.operations;
 
+//Importing our assets...
 import assets.users.*;
 import assets.books.*;
+
+//Importing Java packages...
 import java.io.*;
 import java.util.*;
+import java.time.*;
 
 
 public class rent extends operations{
     String nameaux;
     String titleaux;
-    int newlimit;
-   	user USR;
-	books BK;
-	boolean returned;
-    
-    public void process (user novo, books book){
-	        this.nameaux = novo.get_UserName();
-	        this.titleaux = book.get_bookname();
-	        if ((book.get_isRent() == false) && (novo.get_UserNbooks() > 0)){
-			            newlimit = novo.get_UserLimit() - 1;
-			            novo.set_UserLimit(newlimit);
-			            book.set_Rent(true);
-			            returned = false;
-			        }
-	    }
-    public void reg_writer()throws IOException{
-		BufferedWriter buffWrite = new BufferedWriter(new FileWriter("operations.csv",true));
-		buffWrite.append(this.nameaux + " "+this.titleaux+" "+this.returned+"\n");
+    String delim;
+    int day,mon,year;
+
+   	user Usr;
+	books Bk;
+
+	public String get_NameAux(){
+		return this.nameaux;
+	}
+
+	public String get_TitleAux(){
+		return this.titleaux;
+	}
+
+	public void register_rent(String csv) throws IOException{
+    	this.delim = ",";
+		BufferedWriter buffWrite = new BufferedWriter(new FileWriter(csv,true));
+		buffWrite.append(this.nameaux + delim + this.titleaux + delim + day + delim + mon + delim + year + "\n");
 		buffWrite.close();
 	} 
 		        
@@ -37,56 +41,51 @@ public class rent extends operations{
 		System.out.println(teste);
 		buffRead.close();
 	}
-	public void recoverAllUsers(String csv)throws IOException{
-		String teste, parts[];
-		BufferedReader reading = new BufferedReader(new FileReader(csv));
-						
-		while(reading.ready()){
-			teste = reading.readLine();
-			parts=teste.split(" ");
-			this.nameaux=parts[0];
-			this.titleaux=parts[1];
-			System.out.println("Usuário: "+nameaux);	
-			System.out.println("Título: "+this.titleaux);
-			this.returned=Boolean.valueOf(parts[2]);
-	        if(this.returned)
-				System.out.print("devolvido");
-			else
-				System.out.print("pendente");
-		}
-		reading.close();
+
+	public void print_rent(){
+		System.out.println("[Usuário]: " + this.nameaux);	
+		System.out.println("[Livro]: " + this.titleaux);
+		System.out.println("[Data]: " + this.day + "/" + this.mon + "/" + this. year);
 	}
 	
-	public void rent_elements(String username, String bookname){
-		this.USR = new user();
-		this.BK = new books();
-		int priority;
-		Scanner sc = new Scanner(System.in);
-		this.USR.set_UserNameString(username);
-		this.BK.set_BookTitleString(bookname);
-		
-		System.out.println("Qual é sua formação?");
-		System.out.println("[0] Usuário comum");
-		System.out.println("[1] Estudante");
-		System.out.println("[0] Professor");
-	
-		priority = sc.nextInt();
-		this.USR.set_UserType(priority);
-		switch(priority){
-			case '0':
-					this.USR.set_UserLimit(15);
-					this.USR.set_Nbooks(2);
-					break;
-			case '1':
-					this.USR.set_UserLimit(15);
-					this.USR.set_Nbooks(4);
-				break;
-			case '2':
-					this.USR.set_UserLimit(60);
-					this.USR.set_Nbooks(6);
-				break;
+	public void rent_elements(user Usr, books Bk) throws IOException{
+		this.nameaux = Usr.get_UserName();
+		this.titleaux = Bk.get_BookTitle();
+
+		Usr.read_user("users.csv", this.nameaux);
+
+		if(Usr.has_ReachedLimit()){
+			System.out.println("\n\tO usuário atingiu o limite de empréstimos D:\n");
+			return;
 		}
-		this.process(this.USR,this.BK);
+
+		Bk.read_book("books.csv", this.titleaux);
+
+		//Verifica se está alugado
+		if(!Bk.get_isRent()){
+			//Verifica se é global
+			if(!Bk.get_isGlobal()){
+				//Verifica se há conflito de permissão
+				if(Usr.get_UserType() == 0){
+					System.out.println("\n\tO usuário não pode alugar esse livro D:\n");
+					return;
+				}
+			}
+
+			LocalDate today = LocalDate.now();
+			this.day = today.getDayOfMonth();
+			this.mon = today.getMonthValue();
+			this.year = today.getYear();
+
+			Bk.set_isRent(true);
+			Usr.set_UserRents(Usr.get_UserRents() + 1);
+			this.register_rent("rents.csv");
+			System.out.println("\n\tOK! O livro pôde ser alugado :D\n");
+
+			return;
+
+		}
+		else System.out.println("\n\tO livro está alugado D:\n");
 
 	}
 }

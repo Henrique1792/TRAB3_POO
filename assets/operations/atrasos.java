@@ -23,4 +23,12 @@ public class atrasos{
             System.out.println("Error reading the file!");
         }
     }
+   
+	public void getAll(){
+	sr.emprestimos //stream dos livros não devolvidos ainda
+   .stream()
+   .filter(a -> a.getreturned()==false)
+   .forEach(b -> System.out.println(b.getnameaux()));
+	// .forEach(s -> System.out.println(s.getnameaux()));
+     System.out.println("-------");
 }

@@ -43,14 +43,14 @@ public class Controller extends screen_utils{
 	//controlador da tela de empréstimos & devoluções
 	//-------------------------------------//
 	void rentScreen_controller(){
-		Scanner b_user;
-		rent rt = new rent();
 		int quit = 0;
+		
 		this.rentScreen();
 		while (quit == 0){
 			quit = sc.nextInt();
 			switch(quit){
 				case 1:
+					op.create_rent();
 					this.delim();
 					break;
 				case 2:
@@ -96,7 +96,7 @@ public class Controller extends screen_utils{
 					try{
 						op.recoverAllUsers("users.csv");
 					} catch(IOException stream_error){
-						System.out.println("\t\nNão foi possível recuperar a lista D:\n");
+						System.out.println("\n\tNão foi possível recuperar a lista D:\n");
 					}
 					this.delim();
 					break;
@@ -104,11 +104,16 @@ public class Controller extends screen_utils{
 					try{
 						op.recoverAllBooks("books.csv");
 					} catch(IOException stream_error){
-						System.out.println("\t\nNão foi possível recuperar a lista D:\n");
+						System.out.println("\n\tNão foi possível recuperar a lista D:\n");
 					}
 					this.delim();
 					break;
 				case 3:
+					try{
+						op.recoverAllRents("rents.csv");
+					} catch(IOException stream_error){
+						System.out.println("\n\tNão foi possível recuperar a lista D:\n");
+					}
 					this.delim();
 					break;
 				case 4:
@@ -121,17 +126,18 @@ public class Controller extends screen_utils{
 	//-------------------------------------//
 	void searchScreen_controller(){
 		int quit = 0;
+		String tmp = null;
 
 		this.searchScreen();
 		while (quit == 0){
 			quit = sc.nextInt();
 			switch(quit){
 				case 1:
-					op.searchUser("users.csv");
+					tmp = op.searchUser("users.csv");
 					this.delim();
 					break;
 				case 2:
-					op.searchBook("books.csv");
+					tmp = op.searchBook("books.csv");
 					this.delim();
 					break;
 				case 3:
@@ -150,9 +156,21 @@ public class Controller extends screen_utils{
 			quit = sc.nextInt();
 			switch(quit){
 				case 1:
+					try{
+						if(op.removeUser("users.csv") == 1) System.out.println("\n\tUsuário removido :D");
+						else System.out.println("\n\tUsuário não encontrado D:");
+					} catch(IOException stream_error){
+						System.out.println("\n\tNão foi possível recuperar a lista D:\n");
+					}
 					this.delim();
 					break;
 				case 2:
+					try{
+						if(op.removeBook("books.csv") == 1) System.out.println("\n\tLivro removido :D");
+						else System.out.println("\n\tLivro não encontrado D:");
+					} catch(IOException stream_error){
+						System.out.println("\n\tNão foi possível recuperar a lista D:\n");
+					}
 					this.delim();
 					break;
 				case 3:
