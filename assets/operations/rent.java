@@ -66,4 +66,26 @@ public class rent extends operations{
 		}
 		reading.close();
 	}
-} 
+        
+        public  rent (String csv) {
+        String[] values = csv.split(",");
+        nameaux= values[0];
+        titleaux= values[1];
+        newlimit= Integer.parseInt(values[2]);
+        returned= Boolean.parseBoolean(values[3]);
+        
+    }
+        public String getnameaux() {
+        return this.nameaux;
+        }
+        public String gettitleaux() {
+        return this.nameaux;
+        }
+        public int getnewlimit() {
+        return this.newlimit;
+        }
+        public boolean getreturned() {
+        return this.returned;
+        }
+        
+}
