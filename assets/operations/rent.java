@@ -1,6 +1,6 @@
 package assets.operations;
 
-
+import assets.users.*;
 import assets.books.*;
 import java.io.*;
 import java.util.*;
@@ -10,7 +10,9 @@ public class rent extends operations{
     String nameaux;
     String titleaux;
     int newlimit;
-    boolean returned;
+   	user USR;
+	books BK;
+	boolean returned;
     
     public void process (user novo, books book){
 	        this.nameaux = novo.get_UserName();
@@ -53,5 +55,38 @@ public class rent extends operations{
 				System.out.print("pendente");
 		}
 		reading.close();
+	}
+	
+	public void rent_elements(String username, String bookname){
+		this.USR = new user();
+		this.BK = new books();
+		int priority;
+		Scanner sc = new Scanner(System.in);
+		this.USR.set_UserNameString(username);
+		this.BK.set_BookTitleString(bookname);
+		
+		System.out.println("Qual é sua formação?");
+		System.out.println("[0] Usuário comum");
+		System.out.println("[1] Estudante");
+		System.out.println("[0] Professor");
+	
+		priority = sc.nextInt();
+		this.USR.set_UserType(priority);
+		switch(priority){
+			case '0':
+					this.USR.set_UserLimit(15);
+					this.USR.set_Nbooks(2);
+					break;
+			case '1':
+					this.USR.set_UserLimit(15);
+					this.USR.set_Nbooks(4);
+				break;
+			case '2':
+					this.USR.set_UserLimit(60);
+					this.USR.set_Nbooks(6);
+				break;
+		}
+		this.process(this.USR,this.BK);
+
 	}
 }

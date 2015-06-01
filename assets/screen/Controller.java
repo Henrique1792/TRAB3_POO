@@ -44,9 +44,9 @@ public class Controller extends screen_utils{
 	//-------------------------------------//
 	void rentScreen_controller(){
 		Scanner b_user;
+		rent rt = new rent();
 		int quit = 0;
 		this.rentScreen();
-		
 		while (quit == 0){
 			quit = sc.nextInt();
 			switch(quit){
