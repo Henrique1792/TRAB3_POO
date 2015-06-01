@@ -8,13 +8,23 @@ public class user{
 
 	String name;
 	String delim;
-	int limit, type, nbooks;
+	int limit, type, nbooks, rents;
 	Scanner sc;
+
+	//"suspended until" variables
+	public int sDay, sMon, sYear;
+
+	public boolean has_ReachedLimit(){
+		if(this.get_UserRents() < this.get_UserNbooks()){
+			return false;
+		}
+		return true;
+	}
 
 	public void register_user(String csv) throws IOException{
 		this.delim = ",";
 		BufferedWriter buffWrite = new BufferedWriter(new FileWriter(csv,true));
-		buffWrite.append(this.name + delim + this.type + delim + this.nbooks + delim + this.limit + "\n");
+		buffWrite.append(this.name + delim + this.type + delim + this.nbooks + delim + this.limit + delim + this.rents + delim + this.sDay + delim + this.sMon + delim + this.sYear + "\n");
 		buffWrite.close();
 	}
 
@@ -33,13 +43,14 @@ public class user{
 				this.set_UserType(Integer.parseInt(parts[1]));
 				this.set_UserNbooks(Integer.parseInt(parts[2]));
 				this.set_UserLimit(Integer.parseInt(parts[3]));
+				this.set_UserRents(Integer.parseInt(parts[4]));
+				this.set_UserSuspend(Integer.parseInt(parts[5]),Integer.parseInt(parts[6]),Integer.parseInt(parts[7]));
 				ok[0] = 1;
 			}
 
 			ok[1]++; //incrementa contador para verificar offset
 		}
 
-		System.out.println("\n>Posição no arquivo: " + ok[1]);
 		reading.close();
 		return ok;
 	}
@@ -60,6 +71,24 @@ public class user{
 		this.limit = limit;	
 	}
 
+	public void set_UserRents(int rents){
+		this.rents = rents;	
+	}
+
+	public void set_UserSuspend(int day, int mon, int year){
+		this.sDay = day;	
+		this.sMon = mon;
+		this.sYear = year;
+	}
+
+	public String get_UserName(){
+		return this.name;
+	}
+
+	public int get_UserType(){
+		return this.type;
+	}
+
 	public int get_UserNbooks(){
 		return this.nbooks;
 	}
@@ -68,15 +97,20 @@ public class user{
 		return this.limit;	
 	}
 
-	public void print_User(){
-		this.print_Name();
-		this.print_Type();
-		System.out.println(">Número de livros alugados: " + get_UserNbooks());
-		System.out.println(">Tempo-Limite para devolução: " + get_UserLimit());
+	public int get_UserRents(){
+		return this.rents;
 	}
 
-	void print_Name(){
+	public void print_User(){
+		this.delim = "/";
 		System.out.println("\n[Nome]: " + this.name);
+		this.print_Type();
+		System.out.println("[Limite de Empréstimos]: " + get_UserNbooks());
+		System.out.println("[Tempo-Limite Para Devolução]: " + get_UserLimit());
+		System.out.println("[Livros Emprestados]: " + get_UserRents());
+		if(this.sDay == 0 && this.sMon == 0 && this.sYear == 0)
+			System.out.println("[Suspenso]: Não");
+		else System.out.println("[Suspenso]: " + this.sDay + delim + this.sMon + delim + this.sYear);
 	}
 
 	void print_Type(){
@@ -93,7 +127,7 @@ public class user{
 		}
 	}
 
-	void set_UserName(){
+	void set_UserName(){;
 		System.out.printf("\t>Digite o nome de usuário: ");
 		sc = new Scanner(System.in);
 		this.name = sc.nextLine();

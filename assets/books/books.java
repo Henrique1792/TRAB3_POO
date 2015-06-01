@@ -42,7 +42,6 @@ public class books{
 			ok[1]++; //incrementa contador para verificar offset
 		}
 
-		System.out.println("\n>Posição no arquivo: " + ok[1]);
 		reading.close();
 		return ok;
 	}
@@ -63,6 +62,18 @@ public class books{
 
 	public void set_isGlobalExt(boolean isGlobal){
 		this.isGlobal = isGlobal;
+	}
+
+	public String get_BookTitle(){
+		return this.title;
+	}
+
+	public boolean get_isGlobal(){
+		return this.isGlobal;
+	}
+
+	public boolean get_isRent(){
+		return this.isRent;
 	}
 
 	public void print_Book(){
@@ -106,12 +117,9 @@ public class books{
 		else System.out.println(">Disponível");
 	}
 
-	boolean get_isGlobal(){
-		return this.isGlobal;
-	}
-
-	boolean get_isRent(){
-		return this.isRent;
+	public void print_wasReturned(){
+		if(this.isRent) System.out.println(">Alugado");
+		else System.out.println(">Devolvido");
 	}
 
 }

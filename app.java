@@ -2,7 +2,8 @@
 import assets.screen.*;
 import assets.operations.*;
 import assets.users.*;
-import assets.operations.*;
+import assets.books.*;
+
 //Importing Java packages...
 import java.io.*;
 import java.util.*;
@@ -10,7 +11,8 @@ import java.util.*;
 public class app{
 	//Avoiding classpath errors in compilation...
 	Controller control;
-	operations op;
+	rent Rent;
+	operations Ops;
 
 	public static void main(String[] args){
 		//Starting Sinclair, the Library System...
