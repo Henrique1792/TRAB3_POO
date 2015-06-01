@@ -43,9 +43,10 @@ public class Controller extends screen_utils{
 	//controlador da tela de empréstimos & devoluções
 	//-------------------------------------//
 	void rentScreen_controller(){
+		Scanner b_user;
 		int quit = 0;
-
 		this.rentScreen();
+		
 		while (quit == 0){
 			quit = sc.nextInt();
 			switch(quit){
