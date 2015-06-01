@@ -11,14 +11,17 @@ classe devolute, realiza a devolução
 */
 public class devolute extends operations{
     
-    /* lógica:
-    - registrar devolução (apagar registro do arq de esmpréstimo)
-     ler do arq de empréstimo e procurar o title a ser devolvido
-     if found
-     set_rent = 0
-     set_nbooks = valor +1
-     marca registro como excluido 
-    */
+        public void process (user novo, books book){
+            this.returned = true; // "remoção logica"
+            if (searchBook("rents.csv") == 1){
+                book.set_isRent(false);
+                int auxnbooks = novo.get_UserNbooks();
+                novo.set_UserNbooks(auxnbooks+1);
+                returned = true;
+            }
+            
+        }
+
             
  
 } 

@@ -11,18 +11,16 @@ import java.util.*;
 classe rent, realiza o empréstimo
 */
 public class rent extends operations{
-    String nameaux;
-    String titleaux;
-    int newlimit;
-    boolean returned;
+    
+    
     
     public void process (user novo, books book){
         this.nameaux = novo.get_UserName();
         this.titleaux = book.get_bookname();
-        if ((book.get_isRent() == false) && (novo.get_UserNbooks() > 0)){
+        if ((book.get_isRent() == false) && (novo.get_UserNbooks() > 0) && (novo.get_isSuspended() == false)){
             newlimit = novo.get_UserLimit() - 1;
             novo.set_UserLimit(newlimit);
-            book.set_Rent(true);
+            book.set_isRent(true);
             returned = false;
         }
     }
@@ -31,7 +29,7 @@ public class rent extends operations{
         obs= adicionar campos data atual e data de devolução
 	*/
         public void reg_writer()throws IOException{
-		BufferedWriter buffWrite = new BufferedWriter(new FileWriter("operations.csv",true));
+		BufferedWriter buffWrite = new BufferedWriter(new FileWriter("rents.csv",true));
 		buffWrite.append(this.nameaux + " "+this.titleaux+" "+this.returned+"\n");
 		buffWrite.close();
 	} 
@@ -48,7 +46,7 @@ public class rent extends operations{
 		buffRead.close();
 	}
         /* função que recupera todos os emprestimos */
-	public void recoverAllUsers(String csv)throws IOException{
+	public void recoverRents(String csv)throws IOException{
 	String teste, parts[];
 	BufferedReader reading = new BufferedReader(new FileReader(csv));
 		
