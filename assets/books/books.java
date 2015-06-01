@@ -42,7 +42,7 @@ public class books{
 			ok[1]++; //incrementa contador para verificar offset
 		}
 
-		System.out.println("\t>Posição no arquivo: " + ok[1]);
+		System.out.println("\n>Posição no arquivo: " + ok[1]);
 		reading.close();
 		return ok;
 	}
@@ -76,7 +76,7 @@ public class books{
 		int ok = 0;
 
 		while (ok == 0){
-			System.out.printf("\t>É um livro de uso global? <Y/N>:");
+			System.out.printf("\t>É um livro de uso global? <Y/N>: ");
 
 			this.reading = new Scanner(System.in);
 			receiver = reading.nextLine();

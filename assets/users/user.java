@@ -39,7 +39,7 @@ public class user{
 			ok[1]++; //incrementa contador para verificar offset
 		}
 
-		System.out.println("\t>Posição no arquivo: " + ok[1]);
+		System.out.println("\n>Posição no arquivo: " + ok[1]);
 		reading.close();
 		return ok;
 	}

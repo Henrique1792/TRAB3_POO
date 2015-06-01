@@ -95,7 +95,7 @@ public class Controller extends screen_utils{
 					try{
 						op.recoverAllUsers("users.csv");
 					} catch(IOException stream_error){
-						System.out.println("\t\nNão foi possível recuperar a lista D:\n");
+						System.out.println("\n\tNão foi possível recuperar a lista D:\n");
 					}
 					this.delim();
 					break;
@@ -103,7 +103,7 @@ public class Controller extends screen_utils{
 					try{
 						op.recoverAllBooks("books.csv");
 					} catch(IOException stream_error){
-						System.out.println("\t\nNão foi possível recuperar a lista D:\n");
+						System.out.println("\n\tNão foi possível recuperar a lista D:\n");
 					}
 					this.delim();
 					break;
@@ -149,9 +149,21 @@ public class Controller extends screen_utils{
 			quit = sc.nextInt();
 			switch(quit){
 				case 1:
+					try{
+						if(op.removeUser("users.csv") == 1) System.out.println("\n\tUsuário removido :D");
+						else System.out.println("\n\tUsuário não encontrado D:");
+					} catch(IOException stream_error){
+						System.out.println("\n\tNão foi possível recuperar a lista D:\n");
+					}
 					this.delim();
 					break;
 				case 2:
+					try{
+						if(op.removeBook("books.csv") == 1) System.out.println("\n\tLivro removido :D");
+						else System.out.println("\n\tLivro não encontrado D:");
+					} catch(IOException stream_error){
+						System.out.println("\n\tNão foi possível recuperar a lista D:\n");
+					}
 					this.delim();
 					break;
 				case 3:
