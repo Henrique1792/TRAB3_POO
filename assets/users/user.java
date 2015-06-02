@@ -3,6 +3,7 @@ package assets.users;
 //Importing Java packages...
 import java.io.*;
 import java.util.*;
+import java.time.*;
 
 public class user{
 
@@ -20,6 +21,18 @@ public class user{
 		}
 		return true;
 	}
+
+	public boolean is_Suspended(){
+		if(this.sDay != 0){
+			LocalDate now = LocalDate.now();
+			LocalDate today = LocalDate.of(now.getYear(),now.getMonthValue(),now.getDayOfMonth());
+			LocalDate suspended = LocalDate.of(this.sYear,this.sMon,this.sDay);
+			if(today.isBefore(suspended)){
+				return true;
+			}
+		}
+		return false;
+	} 
 
 	public void register_user(String csv) throws IOException{
 		this.delim = ",";
@@ -109,8 +122,8 @@ public class user{
 		System.out.println("[Tempo-Limite Para Devolução]: " + get_UserLimit());
 		System.out.println("[Livros Emprestados]: " + get_UserRents());
 		if(this.sDay == 0 && this.sMon == 0 && this.sYear == 0)
-			System.out.println("[Suspenso]: Não");
-		else System.out.println("[Suspenso]: " + this.sDay + delim + this.sMon + delim + this.sYear);
+			System.out.println("[Suspenso Até]: Não está suspenso");
+		else System.out.println("[Suspenso Até]: " + this.sDay + delim + this.sMon + delim + this.sYear);
 	}
 
 	void print_Type(){

@@ -124,6 +124,59 @@ public class operations{
 	}
 	//####################################################################//
 
+	//Função de devolver//
+	//####################################################################//
+	public void devolute(){
+		String input;
+		Scanner sc = new Scanner(System.in);
+
+		rent Rent = new rent();
+		user Usr = new user();
+		books Book = new books();
+
+		//procurando o user...
+		System.out.printf("\n\t>Digite o nome do usuário: ");
+		input = sc.nextLine();
+
+		try{
+			if(Usr.read_user("users.csv", input)[0] == 0){
+				System.out.println("\n\tUsuário não encontrado D:");
+				return;
+			}
+		} catch(IOException input_mistake){
+			System.out.println("\n\tUsuário não encontrado D:\n");
+		}
+
+		//procurando o livro...
+		System.out.printf("\n\t>Digite o nome do livro: ");
+		input = sc.nextLine();
+
+		try{
+			if(Book.read_book("books.csv", input)[0] == 0){
+				System.out.println("\n\tLivro não encontrado D:");
+				return;
+			}
+		} catch(IOException input_mistake){
+			System.out.println("\n\tLivro não encontrado D:\n");
+		}
+
+		//fazendo updates...
+		try{
+			if(Rent.read_rent("rents.csv",Usr.get_UserName(),Book.get_BookTitle())[0] == 1){
+				Usr.set_UserRents(Usr.get_UserRents() - 1);
+				Book.set_isRent(false);
+				this.removeRent("rents.csv",Usr.get_UserName(),Book.get_BookTitle());
+				this.updateUser(Usr);
+				this.updateBook(Book);
+				System.out.println("\n\tOK! Livro devolvido :D");
+			}
+			else System.out.println("\n\tNão foi possível localizar o empréstimo D:\n");
+		} catch (IOException stream_error){
+			System.out.println("\n\tNão foi possível abrir a lista D:\n");
+		}
+	}
+	//####################################################################//
+
 	//Funções de pesquisar//
 	//####################################################################//
 	//-----------------//
@@ -249,16 +302,16 @@ public class operations{
 		while(reading.ready()){
 			teste = reading.readLine();
 			parts = teste.split(",");
-			Rent.nameaux = parts[0];
-			Rent.titleaux = parts[1];
-			Rent.day = Integer.parseInt(parts[2]);
-			Rent.mon = Integer.parseInt(parts[3]);
-			Rent.year = Integer.parseInt(parts[4]);
 
-			Rent.print_rent();
+			if(parts[0].charAt(0) != '*'){
+				Rent.nameaux = parts[0];
+				Rent.titleaux = parts[1];
+				Rent.day = Integer.parseInt(parts[2]);
+				Rent.mon = Integer.parseInt(parts[3]);
+				Rent.year = Integer.parseInt(parts[4]);
 
-			Book.read_book("books.csv",Rent.get_TitleAux());
-			Book.print_wasReturned();
+				Rent.print_rent();
+			}
 		}
 
 		reading.close();
@@ -267,6 +320,9 @@ public class operations{
 
 	//Funções de remover//
 	//####################################################################//
+	//---------------//
+	//Remover usuário//
+	//---------------//
 	public int removeUser(String csv) throws IOException{
 		int ok = 0;
 		String input, teste, parts[];
@@ -313,6 +369,9 @@ public class operations{
 		return ok;
 	}
 
+	//-------------//
+	//Remover livro//
+	//-------------//
 	public int removeBook(String csv) throws IOException{
 		int ok = 0;
 		String input, teste, parts[];
@@ -356,15 +415,63 @@ public class operations{
 		return ok;
 	}
 
+	//------------------------------//
+	//Remover empréstimo (Devolução)//
+	//------------------------------//
+	public void removeRent(String csv, String name, String title) throws IOException{
+		String input, teste, parts[];
+		rent Rent = new rent();
+
+		File tmprents = new File("tmprents.csv");
+		File rents = new File("rents.csv");
+		BufferedReader reading = new BufferedReader(new FileReader("rents.csv"));
+
+		while(reading.ready()){
+			teste = reading.readLine();
+			parts = teste.split(",");
+
+			if(parts[0].equals(name) && parts[1].equals(title)){
+				char[] removed = parts[0].toCharArray();
+				removed[0] = '*';
+				parts[0] = String.valueOf(removed);
+			}
+
+			Rent.nameaux = parts[0];
+			Rent.titleaux = parts[1];
+			Rent.day = Integer.parseInt(parts[2]);
+			Rent.mon = Integer.parseInt(parts[3]);
+			Rent.year = Integer.parseInt(parts[4]);
+
+			try{
+				Rent.register_rent("tmprents.csv");
+			} catch(IOException stream_error){
+				System.out.println("\n\tErro ao remover a entrada D:\n");			 
+			}
+		}
+
+		reading.close();
+		rents.delete();
+
+		File newRents = new File("rents.csv");
+		tmprents.renameTo(newRents);
+
+	}
+
+	//-----------------//
+	//Garbage Collector//
+	//-----------------//
 	public void garbageCollector() throws IOException{
 		String teste, parts[];
 		user Usr = new user();
 		books Book = new books();
+		rent Rent = new rent();
 
 		File tmpusers = new File("tmpusers.csv");
 		File tmpbooks = new File("tmpbooks.csv");
+		File tmprents = new File("tmprents.csv");
 		File users = new File("users.csv");
 		File books = new File("books.csv");
+		File rents = new File("rents.csv");
 
 		//atualizando o arquivo de usuários...
 		BufferedReader reading = new BufferedReader(new FileReader("users.csv"));
@@ -419,6 +526,35 @@ public class operations{
 
 		File newBooks = new File("books.csv");
 		tmpbooks.renameTo(newBooks);
+
+		//atualizando o arquivo de rents...
+		reading = new BufferedReader(new FileReader("rents.csv"));
+
+		while(reading.ready()){
+			teste = reading.readLine();
+			parts = teste.split(",");
+
+			System.out.println(teste);
+			if(teste.charAt(0) != '*'){
+				Rent.nameaux = parts[0];
+				Rent.titleaux = parts[1];
+				Rent.day = Integer.parseInt(parts[2]);
+				Rent.mon = Integer.parseInt(parts[3]);
+				Rent.year = Integer.parseInt(parts[4]);
+
+				try{
+					Rent.register_rent("tmprents.csv");
+				} catch(IOException stream_error){
+					System.out.println("\n\tErro ao passar o GarbageCollector D:\n");			 
+				}
+			}
+		}
+
+		reading.close();
+		rents.delete();
+
+		File newRents = new File("rents.csv");
+		tmprents.renameTo(newRents);
 
 	}
 	//####################################################################//

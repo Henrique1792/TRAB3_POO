@@ -8,6 +8,14 @@ import assets.books.*;
 import java.io.*;
 import java.util.*;
 
+//#############################################//
+//       xX.Java Library System v1.0.Xx        //
+//---------------------------------------------//
+//Gustavo Santiago - 8937416                   //
+//Henrique M Freitas - 8937225                 //
+//Rita Raad - 8061452                          //
+//#############################################//
+
 public class app{
 	//Avoiding classpath errors in compilation...
 	Controller control;

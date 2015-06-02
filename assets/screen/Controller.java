@@ -54,6 +54,7 @@ public class Controller extends screen_utils{
 					this.delim();
 					break;
 				case 2:
+					op.devolute();
 					this.delim();
 					break;
 				case 3:

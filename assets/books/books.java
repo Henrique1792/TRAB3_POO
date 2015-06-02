@@ -3,6 +3,7 @@ package assets.books;
 //Importing Java packages...
 import java.io.*;
 import java.util.*;
+import java.time.*;
 
 public class books{
 	boolean isGlobal;
@@ -115,11 +116,6 @@ public class books{
 	void print_isRent(){
 		if(this.isRent) System.out.println(">Alugado");
 		else System.out.println(">Disponível");
-	}
-
-	public void print_wasReturned(){
-		if(this.isRent) System.out.println(">Alugado");
-		else System.out.println(">Devolvido");
 	}
 
 }

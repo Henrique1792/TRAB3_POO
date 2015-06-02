@@ -34,18 +34,37 @@ public class rent extends operations{
 		buffWrite.close();
 	} 
 		        
-	public void read_rent(String csv)throws IOException{
-		String teste;
-		BufferedReader buffRead = new BufferedReader(new FileReader(csv));
-		teste=buffRead.readLine();
-		System.out.println(teste);
-		buffRead.close();
+	public int[] read_rent(String csv, String name, String title) throws IOException{
+		int[] ok = new int[2];
+		String teste, parts[];
+		BufferedReader reading = new BufferedReader(new FileReader(csv));
+
+		ok[1]--; //contador da posição começa em -1
+		while(reading.ready() && ok[0] == 0){
+			teste = reading.readLine();
+			parts = teste.split(",");
+
+			if(parts[0].equals(name) && parts[1].equals(title)){
+				this.nameaux = parts[0];
+				this.titleaux = parts[1];
+				this.day = Integer.parseInt(parts[2]);
+				this.mon = Integer.parseInt(parts[3]);
+				this.year = Integer.parseInt(parts[4]);
+
+				ok[0] = 1;
+			}
+
+			ok[1]++; //incrementa contador para verificar offset
+		}
+
+		reading.close();
+		return ok;
 	}
 
 	public void print_rent(){
 		System.out.println("[Usuário]: " + this.nameaux);	
 		System.out.println("[Livro]: " + this.titleaux);
-		System.out.println("[Data]: " + this.day + "/" + this.mon + "/" + this. year);
+		System.out.println("[Data]: " + this.day + "/" + this.mon + "/" + this. year + "\n");
 	}
 	
 	public void rent_elements(user Usr, books Bk) throws IOException{
@@ -56,6 +75,11 @@ public class rent extends operations{
 
 		if(Usr.has_ReachedLimit()){
 			System.out.println("\n\tO usuário atingiu o limite de empréstimos D:\n");
+			return;
+		}
+
+		if(Usr.is_Suspended()){
+			System.out.println("\n\tO usuário está suspenso e não pode alugar agora D:\n");
 			return;
 		}
 

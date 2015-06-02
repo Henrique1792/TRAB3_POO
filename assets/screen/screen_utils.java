@@ -16,7 +16,7 @@ public class screen_utils{
 	}
 
 	void screenHeader(){
-		System.out.println("\n		>>Java Library System v0.3<<");
+		System.out.println("\n		>>Java Library System v1.0<<");
 		this.getTime();
 	}
 
