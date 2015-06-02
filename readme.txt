@@ -10,6 +10,9 @@
 - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
 - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
 
+Para executar essa aplicação entre com o comando javac *.java no diretório 
+raiz do programa.
+Para rodar o jar 
 
 
 
@@ -18,6 +21,9 @@
                             FUNCIONAMENTO
 - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
 - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+
+A interface está implementada no terminal, logo qualquer ação será realizada
+com comandos, esfecificados na tela ou no menu.
 
 Nesta aplicação são permitidas ações de empréstimo e devolução de livros,
 sendo que essas operações estão sujeitas à penalidades, caso os usuários 
